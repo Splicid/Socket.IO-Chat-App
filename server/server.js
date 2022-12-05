@@ -23,10 +23,13 @@ io.on("connection", (socket) => {
     console.log('User Connect ', socket.id)
 
     socket.on("Send_message", (data) => {
-        socket.broadcast.emit("receive_message", data)
+        userMessage = (socket.id + " " +  data.message)
+        console.log(userMessage)
+        socket.broadcast.emit("receive_message", userMessage)
     })
 
     socket.on("disconnect", () => {
+        socket.disconnect(0);
         console.log("user Disconnected", socket.id)
     })
 })
