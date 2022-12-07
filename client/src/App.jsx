@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import './App.css'
+import './style/App.css'
 import io from 'socket.io-client'
 import { useEffect } from 'react'
+
+
 const socket = io.connect("http://localhost:5000")
 function App() {
   const [message, setMessage] = useState("");
@@ -24,6 +26,7 @@ function App() {
       await socket.emit("Send_message", messageData);
       setMessageList((list) => [...list, messageData]);
       SetmessageReceived("");
+      console.log(messageData)
     }
   }
 
@@ -33,7 +36,6 @@ function App() {
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      console.log(data)
       setMessageList((list) => [...list, data]);
     })
   }, [socket])
@@ -47,9 +49,10 @@ function App() {
         setMessage(event.target.value);
       }} />
       <button onClick={sendMessage}> Send Message </button>
-      {messageList.map((messageContent) => {
+      {messageList.map((messageContent, index) => {
             return (
               <div
+                key={index}
                 className="message"
                 id={username === messageContent.author ? "you" : "other"}
               >

@@ -1,0 +1,27 @@
+* {
+    margin: auto 0;
+}
+.main{
+    height: 100vh;
+    background: rgb(37, 36, 36);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    height: 50vh;
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: red solid 10px;
+    margin: 1rem;
+}
+
+.userInput{
+    padding:10px;
+    border:0;
+    border-radius: 1rem;
+    font-size: clamp(1rem, 2.5vw, 2rem); 
+}
