@@ -7,7 +7,7 @@ const main_page = () => {
             <input className='userInput' placeholder='Username...' onChange={(event) => {
                 setUsername(event.target.value);
             }} />
-            <button> Enter Chat</button>
+            <button className='userButton'> Enter Chat</button>
             </div>
         </div>
     )
