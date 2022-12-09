@@ -22,6 +22,16 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
     console.log('User Connect ', socket.id)
 
+    socket.on("join", () =>{
+        socket.join("room1")
+        //console.log("triggered on server")
+    })
+
+    socket.on("memberConnected", () => {
+        //socket.to("room1").emit("joinedroom", "socket.id")
+        socket.broadcast.emit("joinedroom", "Room 1")
+    })
+
     socket.on("Send_message", (data) => {
         socket.broadcast.emit("receive_message", data)
         //console.log(data.message)

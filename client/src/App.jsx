@@ -11,6 +11,7 @@ function App() {
   const [messageReceived, SetmessageReceived] = useState("");
   const [username, setUsername] = useState([{  }]);
   const [messageList, setMessageList] = useState([]);
+  const [Room, setRoom] = useState([]);
 
   const sendMessage = async () => {
     if (message !== "" ){
@@ -21,6 +22,7 @@ function App() {
           new Date(Date.now()).getHours() +
           ":" +
           new Date(Date.now()).getMinutes(),
+        RoomName: Room
       };
 
       await socket.emit("Send_message", messageData);
@@ -38,9 +40,19 @@ function App() {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     })
+
     socket.on("receive_username", (data) => {
       setUsername(data);
     })
+
+    //room displays but only if code is resaved ?????
+    // still testing room joining
+    socket.emit("join")
+    socket.emit("memberConnected")
+    socket.on("joinedroom", (data) => {
+      console.log(data)
+    })
+
   }, [socket])
 
   return (
