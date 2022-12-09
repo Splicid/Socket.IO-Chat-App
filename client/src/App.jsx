@@ -38,13 +38,16 @@ function App() {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     })
+    socket.on("receive_username", (data) => {
+      setUsername(data);
+    })
   }, [socket])
 
   return (
     <div>
-      <input placeholder='Username...' onChange={(event) => {
+      {/* <input placeholder='Username...' onChange={(event) => {
         setUsername(event.target.value);
-      }} />
+      }} /> */}
       <input placeholder='Message...' onChange={(event) => {
         setMessage(event.target.value);
       }} />

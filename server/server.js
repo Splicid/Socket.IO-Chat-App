@@ -27,6 +27,11 @@ io.on("connection", (socket) => {
         //console.log(data.message)
     })
 
+    socket.on("send_username", (data) => {
+        socket.broadcast.emit("receive_username", data)
+        console.log(data)
+    })
+
     socket.on("disconnect", () => {
         console.log("user Disconnected", socket.id)
     })

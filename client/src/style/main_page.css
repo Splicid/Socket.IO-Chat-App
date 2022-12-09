@@ -32,3 +32,10 @@
     padding: 2rem; 
     font-size: clamp(1rem, 2.5vw, 2rem); 
 }
+
+
+@media screen and (max-width: 480px) {
+    .userButton {
+      background-color: rgb(56, 150, 56);
+    }
+  }
