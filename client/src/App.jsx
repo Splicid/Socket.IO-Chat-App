@@ -13,7 +13,14 @@ function App() {
   const [messageList, setMessageList] = useState([]);
   const [Room, setRoom] = useState([]);
 
+
   const sendMessage = async () => {
+    socket.on("joinedroom", () => {
+      console.log( username )
+    })
+    socket.emit("join")
+    socket.emit("memberJoined")
+
     if (message !== "" ){
       const messageData = {
         author: username,
@@ -29,16 +36,17 @@ function App() {
       setMessageList((list) => [...list, messageData]);
       SetmessageReceived("");
       console.log(messageData)
+
     }
   }
-
   // const sendMessage = () => {
   //   socket.emit("Send_message", {message})
   // }
 
   useEffect(() => {
-    socket.on("receive_message", (data) => {
-      setMessageList((list) => [...list, data]);
+    
+    socket.on("receive_message", (arg2) => {
+      setMessageList((list) => [...list, arg2]);
     })
 
     socket.on("receive_username", (data) => {
@@ -47,12 +55,6 @@ function App() {
 
     //room displays but only if code is resaved ?????
     // still testing room joining
-    socket.emit("join")
-    socket.emit("memberConnected")
-    socket.on("joinedroom", (data) => {
-      console.log(data)
-    })
-
   }, [socket])
 
   return (

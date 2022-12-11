@@ -24,12 +24,10 @@ io.on("connection", (socket) => {
 
     socket.on("join", () =>{
         socket.join("room1")
-        //console.log("triggered on server")
+        console.log("Client 1 Triggered")
     })
-
-    socket.on("memberConnected", () => {
-        //socket.to("room1").emit("joinedroom", "socket.id")
-        socket.broadcast.emit("joinedroom", "Room 1")
+    socket.on("memberJoined", () =>{
+        socket.to("room1").emit("joinedroom")
     })
 
     socket.on("Send_message", (data) => {
@@ -44,6 +42,7 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect", () => {
         console.log("user Disconnected", socket.id)
+        //socket.disconnect()
     })
 })
 
